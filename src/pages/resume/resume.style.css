@@ -4,7 +4,7 @@
 }
 .contact-container {
     background-color: #DBE9FF;
-    flex: 0.2;
+    flex: 0.3;
     color: black;
 }
 .picture {
@@ -38,7 +38,7 @@
 .resume-content-container {
     background-color: white;
     min-height: 100vh;
-    flex: 0.8;
+    flex: 0.7;
     padding: 10px 10px;
 }
 
