@@ -12,7 +12,7 @@ const Resume = () => {
     const params = useParams();
     const [studentData, setStudentData] = useState({});
     const [loading, setLoading] = useState(true);
-    
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     useEffect(() => {
         const { brachId, studentId } = params;
@@ -36,8 +36,14 @@ const Resume = () => {
     return(
         <div className='resume-container'>
             <div className='contact-container'>
-                <img className='picture' src={studentData.picture} />
-                
+                <img className='picture' src={studentData.picture} onLoad={_ => setImageLoaded(true)}  />
+                {
+                    imageLoaded
+                    ?
+                    <div className='loaded' />
+                    :
+                    null
+                }
                 <div className='side-details-container'>
                     <p className='side-details-title' style={{ marginTop:"30px" }} >Contact</p>
                     <div className='side-details-value'>
