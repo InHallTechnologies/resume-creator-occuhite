@@ -98,7 +98,7 @@ const Resume = () => {
             <div className='resume-content-container'>
                 <div style={{ paddingTop:'20px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', backgroundColor:'#322F26', color:'white' }} >
                     <h1 style={{marginTop:'20px'}} >{studentData.name}</h1>
-                    <p style={{paddingBottom:'20px', marginTop:'10px'}} >{studentData.dateOfBirth}</p>
+                    <p style={{paddingBottom:'20px', marginTop:'10px'}} >{studentData.dateOfBirth.split('-').reverse().join("-")}</p>
                 </div>
 
                 <div className='details-container'>
@@ -158,7 +158,7 @@ const Resume = () => {
 
                                                 <div style={{display:'flex', alignItems:'center'}}>
                                                     <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                                    <p>{item.startDate} to {item.endDate}</p>
+                                                    <p>{item.startDate.split('-').reverse().join("-")} to {item.endDate.split('-').reverse().join("-")}</p>
                                                 </div>
 
                                             </div>
@@ -187,7 +187,7 @@ const Resume = () => {
                                             <p style={{marginTop:"10px"}} >{item.name}</p>
                                             <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
                                                 <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                                <p>{item.date}</p>
+                                                <p>{item.date.split('-').reverse().join("-")}</p>
                                             </div>
                                         </div>
                                     )
@@ -214,7 +214,7 @@ const Resume = () => {
                                             <p style={{marginTop:"10px"}} >{item.description}</p>
                                             <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
                                                 <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                                <p>{item.date}</p>
+                                                <p>{item.date.split('-').reverse().join("-")}</p>
                                             </div>
                                         </div>
                                     )
@@ -243,7 +243,7 @@ const Resume = () => {
                                             <p style={{marginTop:"10px"}} >{item.description}</p>
                                             <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
                                                 <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                                <p>{item.date}</p>
+                                                <p>{item.date.split('-').reverse().join("-")}</p>
                                             </div>
                                         </div>
                                     )
