@@ -1,6 +1,8 @@
+body { -webkit-print-color-adjust: exact; }
 .resume-container {
     display: flex;
     max-width: 2480px;
+    -webkit-print-color-adjust: exact;
 
 }
 .contact-container {
@@ -25,7 +27,7 @@
 .side-details-title{
     font-weight: bold;
     color: white;
-    background-color: #322F26;
+    background-color: #322F26 !important;
     padding: 5px 5px;
 }
 
@@ -63,7 +65,7 @@
 
 .project-details-container {
     display: flex;
-    background-color: rgba(204, 204, 204, 0.13);
+    background-color: rgba(204, 204, 204, 0.13) !important;
     padding: 10px;
     flex-direction: column;
     word-break: break-all;
@@ -73,4 +75,87 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+}
+
+@media print {
+    .print-button {
+        display: none;
+    }
+    .resume-container {
+        display: flex;
+        max-width: 2480px;
+    
+    }
+    .contact-container {
+        background-color: #E3E3E3;
+        flex: 0.3;
+        color: black;
+        margin-left: 10px;
+    }
+    .picture {
+        width: 130px;
+        height: 130px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        margin-top: 30px;
+    }
+    
+    .side-details-container {
+        margin-top: 20px;
+        margin: 10px 20px;
+    }
+    
+    .side-details-title{
+        font-weight: bold;
+        color: white;
+        background-color: #322F26 !important;
+        padding: 5px 5px;
+    }
+    
+    .side-details-value {
+        margin-top: 10px;
+    }
+    
+    
+    .horizontal-rule {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+    }
+    
+    .resume-content-container {
+        background-color: white;
+        min-height: 100vh;
+        flex: 0.7;
+        padding: 10px 10px;
+        padding-top: 0;
+    }
+    
+    
+    .details-container {
+        margin-top: 30px;
+    }
+    
+    .details-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        
+        grid-gap: 20px;
+    }
+    
+    .project-details-container {
+        display: flex;
+        background-color: rgba(204, 204, 204, 0.13) !important;
+        padding: 10px;
+        flex-direction: column;
+        word-break: break-all;
+    }
+    
+    .project-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+   
 }

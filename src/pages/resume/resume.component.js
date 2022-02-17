@@ -35,11 +35,18 @@ const Resume = () => {
     if (loading){
         return <h1>Hold up!</h1>
     }
+
+    const handlePrint = () => {
+        window.print()
+    }
     
 
     return(
-        <div className='resume-container'>
+        <div >
+            <button className='print-button' style={{width:'100%', border:'none', backgroundColor:'#322F26', color:'white', padding:'10px'}} onClick={handlePrint} >Save/Print Resume</button>
+            <div className='resume-container'>
             <div className='contact-container'>
+                
                 <img className='picture' src={studentData.picture} onLoad={_ => setImageLoaded(true)}  />
                 {
                     imageLoaded
@@ -280,6 +287,8 @@ const Resume = () => {
                 }
                 
             </div>
+            </div>
+            
         </div>
     )
 }
