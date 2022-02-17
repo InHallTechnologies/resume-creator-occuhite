@@ -16,12 +16,16 @@ const Resume = () => {
 
     useEffect(() => {
         const { brachId, studentId } = params;
+        console.log(brachId, studentId);    
         const studentRef = ref(firebaseDatabase, `STUDENTS_ARCHIVE/${brachId}/${studentId}`);
         get(studentRef).then(snapshot => {
             if (snapshot.exists()){
                 const data = snapshot.val();
+                console.log(data);
                 setStudentData(data);
                 setLoading(false);
+            }else {
+                alert("Hello world")
             }
         })
     }, [])
@@ -92,139 +96,189 @@ const Resume = () => {
 
             
             <div className='resume-content-container'>
-                <div style={{ marginTop:'20px' }} >
-                    <h1>{studentData.name}</h1>
-                    <p>{studentData.dateOfBirth}</p>
+                <div style={{ paddingTop:'20px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', backgroundColor:'#322F26', color:'white' }} >
+                    <h1 style={{marginTop:'20px'}} >{studentData.name}</h1>
+                    <p style={{paddingBottom:'20px', marginTop:'10px'}} >{studentData.dateOfBirth}</p>
                 </div>
 
                 <div className='details-container'>
-                    <h2>Project Details</h2>
-                    <div className='details-list'>
-                        {
-                            studentData.projectDetails.map(item => {
-                                return (
-                                    <div className='project-details-container'>
-                                        <h4>{item.name}</h4>
-                                        <p style={{marginTop:"10px"}} >{item.description}</p>
-                                    </div>
-                                )
-                            })
-                        }
+                    <h2>Profile</h2>
+                    <div className='details-list project-details-container' style={{marginTop:'10px'}} >
+                        <p>{studentData.aboutYourself}</p>
                     </div>
                 </div>
 
+                {
+                    studentData.projectDetails
+                    ?
+                    <div className='details-container'>
+                        <h2>Project Details</h2>
+                        <div className='details-list'>
+                            {
+                                studentData.projectDetails.map(item => {
+                                    return (
+                                        <div className='project-details-container'>
+                                            <h4>{item.name}</h4>
+                                            <p style={{marginTop:"10px"}} >{item.description}</p>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    :
+                    null
+                }
 
-                <div className='details-container' style={{marginTop:"50px"}}>
-                    <h2>Internships</h2>
-                    <div className='details-list'>
-                        {
-                            studentData.internshipDetails.map(item => {
-                                return (
-                                    <div className='project-details-container'>
-                                        <h4>{item.compName}</h4>
-                                        <p style={{marginTop:"10px"}} >{item.description}</p>
-                                        <div className='project-info'>
-                                            <div style={{display:'flex', alignItems:'center'}}>
-                                                <BsFillPersonFill size={16} color='#444' style={{marginRight:'5px'}} />
-                                                <p>{item.role}</p>
+                
+
+
+                {
+                    studentData.internshipDetails
+                    ?
+                    <div className='details-container' style={{marginTop:"50px"}}>
+                        <h2>Internships</h2>
+                        <div className='details-list'>
+                            {
+                                studentData.internshipDetails.map(item => {
+                                    return (
+                                        <div className='project-details-container'>
+                                            <h4>{item.compName}</h4>
+                                            <p style={{marginTop:"10px"}} >{item.description}</p>
+                                            <div className='project-info'>
+                                                <div style={{display:'flex', alignItems:'center'}}>
+                                                    <BsFillPersonFill size={16} color='#444' style={{marginRight:'5px'}} />
+                                                    <p>{item.role}</p>
+                                                </div>
+
+                                                <div style={{display:'flex', alignItems:'center'}}>
+                                                    <BiTimeFive size={16} color='#444' style={{marginRight:'5px'}} />
+                                                    <p>{item.duration}</p>
+                                                </div>
+
+                                                <div style={{display:'flex', alignItems:'center'}}>
+                                                    <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
+                                                    <p>{item.date}</p>
+                                                </div>
+
                                             </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    :
+                    null
+                }
+                
 
-                                            <div style={{display:'flex', alignItems:'center'}}>
-                                                <BiTimeFive size={16} color='#444' style={{marginRight:'5px'}} />
-                                                <p>{item.duration}</p>
-                                            </div>
-
-                                            <div style={{display:'flex', alignItems:'center'}}>
+                {
+                   studentData.certificationDetails
+                   ?
+                    <div className='details-container' style={{marginTop:"50px"}}>
+                        <h2>Certificates</h2>
+                        <div className='details-list'>
+                            {
+                                studentData.certificationDetails.map(item => {
+                                    return (
+                                        <div className='project-details-container'>
+                                            <h4>{item.agency}</h4>
+                                            <p style={{marginTop:"10px"}} >{item.name}</p>
+                                            <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
                                                 <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
                                                 <p>{item.date}</p>
                                             </div>
-                                            
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                    :
+                    null
+                }
+                
 
-
-                <div className='details-container' style={{marginTop:"50px"}}>
-                    <h2>Certificates</h2>
-                    <div className='details-list'>
-                        {
-                            studentData.certificationDetails.map(item => {
-                                return (
-                                    <div className='project-details-container'>
-                                        <h4>{item.agency}</h4>
-                                        <p style={{marginTop:"10px"}} >{item.name}</p>
-                                        <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
-                                            <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                            <p>{item.date}</p>
+                {
+                    studentData.researchPapers
+                    ?
+                    <div className='details-container' style={{marginTop:"50px"}}>
+                        <h2>Research Papers</h2>
+                        <div className='details-list'>
+                            {
+                                studentData.researchPapers.map(item => {
+                                    return (
+                                        <div className='project-details-container'>
+                                            <h4>{item.agency} - {item.title}</h4>
+                                            <p style={{marginTop:"10px"}} >{item.description}</p>
+                                            <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
+                                                <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
+                                                <p>{item.date}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                    :
+                    null
+                }
 
-                <div className='details-container' style={{marginTop:"50px"}}>
-                    <h2>Research Papers</h2>
-                    <div className='details-list'>
-                        {
-                            studentData.researchPapers.map(item => {
-                                return (
-                                    <div className='project-details-container'>
-                                        <h4>{item.agency} - {item.title}</h4>
-                                        <p style={{marginTop:"10px"}} >{item.description}</p>
-                                        <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
-                                            <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                            <p>{item.date}</p>
+                
+
+
+                {
+                    studentData.awards
+                    ?
+                    <div className='details-container' style={{marginTop:"50px"}}>
+                        <h2>Awards & Achievements</h2>
+                        <div className='details-list'>
+                            {
+                                studentData.awards.map(item => {
+                                    return (
+                                        <div className='project-details-container'>
+                                            <h4>{item.name}</h4>
+                                            <p style={{marginTop:"10px"}} >{item.description}</p>
+                                            <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
+                                                <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
+                                                <p>{item.date}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                    :
+                    null
+                }
+                
 
 
-                <div className='details-container' style={{marginTop:"50px"}}>
-                    <h2>Awards & Achievements</h2>
-                    <div className='details-list'>
-                        {
-                            studentData.awards.map(item => {
-                                return (
-                                    <div className='project-details-container'>
-                                        <h4>{item.name}</h4>
-                                        <p style={{marginTop:"10px"}} >{item.description}</p>
-                                        <div style={{display:'flex', alignItems:'center', marginTop:'5px'}}>
-                                            <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                            <p>{item.date}</p>
+                {
+                    studentData.additionalDetails
+                    ?
+                    <div className='details-container' style={{marginTop:"50px"}}>
+                        <h2>Additional Details</h2>
+                        <div className='details-list'>
+                            {
+                                studentData.additionalDetails.map(item => {
+                                    return (
+                                        <div className='project-details-container'>
+                                            <h4>{item.name}</h4>
+                                            <p style={{marginTop:"10px"}} >{item.description}</p>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
-
-
-                <div className='details-container' style={{marginTop:"50px"}}>
-                    <h2>Additional Details</h2>
-                    <div className='details-list'>
-                        {
-                            studentData.additionalDetails.map(item => {
-                                return (
-                                    <div className='project-details-container'>
-                                        <h4>{item.name}</h4>
-                                        <p style={{marginTop:"10px"}} >{item.description}</p>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
+                    :
+                    null
+                }
+                
             </div>
         </div>
     )

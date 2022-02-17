@@ -1,11 +1,13 @@
 .resume-container {
     display: flex;
-    min-height: 100vh;
+    max-width: 2480px;
+
 }
 .contact-container {
-    background-color: #DBE9FF;
+    background-color: #E3E3E3;
     flex: 0.3;
     color: black;
+    margin-left: 10px;
 }
 .picture {
     width: 130px;
@@ -22,6 +24,9 @@
 
 .side-details-title{
     font-weight: bold;
+    color: white;
+    background-color: #322F26;
+    padding: 5px 5px;
 }
 
 .side-details-value {
@@ -40,6 +45,7 @@
     min-height: 100vh;
     flex: 0.7;
     padding: 10px 10px;
+    padding-top: 0;
 }
 
 
