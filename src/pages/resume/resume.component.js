@@ -43,7 +43,7 @@ const Resume = () => {
 
     return(
         <div >
-            <button className='print-button' style={{width:'100%', border:'none', backgroundColor:'#322F26', color:'white', padding:'10px'}} onClick={handlePrint} >Save/Print Resume</button>
+            <button className='print-button' style={{border:'none', backgroundColor:'blue', color:'white', padding:'10px', fontWeight:'bold',marginLeft:'50%', transform: `translate(-50%, 0)`, marginTop:'20px', marginBottom:'20px' }} onClick={handlePrint} >Save/Print Resume</button>
             <div className='resume-container'>
             <div className='contact-container'>
                 
