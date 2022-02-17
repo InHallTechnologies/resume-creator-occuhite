@@ -158,7 +158,7 @@ const Resume = () => {
 
                                                 <div style={{display:'flex', alignItems:'center'}}>
                                                     <AiFillCalendar size={16} color='#444' style={{marginRight:'5px'}} />
-                                                    <p>{item.date}</p>
+                                                    <p>{item.startDate}-{item.endDate}</p>
                                                 </div>
 
                                             </div>
