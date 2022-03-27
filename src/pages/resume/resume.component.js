@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { get, ref } from 'firebase/database';
-
+import { get, ref, onValue } from 'firebase/database';
 import './resume.style.css';
 import { firebaseDatabase } from '../../backend/firebase-handler';
 import { BsFillPersonFill,  } from 'react-icons/bs';
@@ -15,22 +14,21 @@ const Resume = () => {
     const [imageLoaded, setImageLoaded] = useState(false);
 
     useEffect(() => {
-        const { brachId, studentId } = params;
-        console.log(brachId, studentId);    
+        const { brachId, studentId } = params;    
         const studentRef = ref(firebaseDatabase, `STUDENTS_ARCHIVE/${brachId}/${studentId}`);
-        get(studentRef).then(snapshot => {
+        onValue(studentRef, snapshot => {
             if (snapshot.exists()){
                 const data = snapshot.val();
-                console.log(data);
                 setStudentData(data);
                 setLoading(false);
             }else {
                 alert("Hello world")
             }
-        })
+        }, { onlyOnce:true })
+        
     }, [])
 
-    console.log(studentData);
+  
 
     if (loading){
         return <h1>Hold up!</h1>
@@ -111,7 +109,7 @@ const Resume = () => {
                 <div className='details-container'>
                     <h2>Profile</h2>
                     <div className='details-list project-details-container' style={{marginTop:'10px'}} >
-                        <p>{studentData.aboutYourself}</p>
+                        <p style={{wordBreak:'keep-all'}}>{studentData.aboutYourself}</p>
                     </div>
                 </div>
 
@@ -126,7 +124,7 @@ const Resume = () => {
                                     return (
                                         <div className='project-details-container'>
                                             <h4>{item.name}</h4>
-                                            <p style={{marginTop:"10px"}} >{item.description}</p>
+                                            <p style={{marginTop:"10px", wordBreak:'keep-all'}} >{item.description}</p>
                                         </div>
                                     )
                                 })
