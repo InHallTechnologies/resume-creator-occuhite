@@ -1,3 +1,7 @@
+* {
+    word-break: keep-all;
+}
+
 body { -webkit-print-color-adjust: exact; }
 .resume-container {
     display: flex;

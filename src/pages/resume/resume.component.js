@@ -28,15 +28,16 @@ const Resume = () => {
         
     }, [])
 
+
+    const handlePrint = () => {
+        window.print()
+    }
   
 
     if (loading){
         return <h1>Hold up!</h1>
     }
 
-    const handlePrint = () => {
-        window.print()
-    }
     
 
     return(
